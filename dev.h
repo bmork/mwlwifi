@@ -376,6 +376,10 @@ struct mwl_priv {
 
 	bool mfg_mode;
 
+#if IS_ENABLED(CONFIG_HWMON)
+	struct device *hwmon;
+#endif
+
 #ifdef CONFIG_DEBUG_FS
 	struct dentry *debugfs_phy;
 	u32 reg_type;

@@ -30,6 +30,7 @@
 #ifdef SUPPORT_MFG
 #include "mfg.h"
 #endif
+#include "hwmon.h"
 #ifdef CONFIG_DEBUG_FS
 #include "debugfs.h"
 #endif
@@ -822,6 +823,8 @@ static int mwl_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		   (priv->antenna_tx == ANTENNA_TX_4_AUTO) ? "4" : "2",
 		   (priv->antenna_rx == ANTENNA_RX_4_AUTO) ? "4" : "2");
 
+	mwl_hwmon_register(hw);
+
 #ifdef CONFIG_DEBUG_FS
 	mwl_debugfs_init(hw);
 #endif
@@ -852,6 +855,8 @@ static void mwl_remove(struct pci_dev *pdev)
 
 	if (!hw)
 		return;
+
+	mwl_hwmon_unregister(hw);
 
 	priv = hw->priv;
 

@@ -7,6 +7,7 @@ mwlwifi-objs		+= fwcmd.o
 mwlwifi-objs		+= tx.o
 mwlwifi-objs		+= rx.o
 mwlwifi-objs		+= isr.o
+mwlwifi-objs		+= hwmon.o
 mwlwifi-$(CONFIG_DEBUG_FS) += debugfs.o
 ifeq (1, $(BUILD_MFG))
 mwlwifi-objs += mfg.o
