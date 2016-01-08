@@ -17,7 +17,8 @@ static ssize_t temp1_input_show(struct device *device,
 	struct ieee80211_hw *hw = dev_get_drvdata(device);
 	int ret = mwl_fwcmd_get_temp(hw, &temp);
 
-	return ret < 0 ? ret : snprintf(buf, PAGE_SIZE, "%d\n", temp * 1000);
+	/* 'temp' appears to be Fahrenheit despite the 'celcius' field name */
+	return ret < 0 ? ret : snprintf(buf, PAGE_SIZE, "%d\n", (temp - 32) * 1000 * 5 / 9);
 }
 static DEVICE_ATTR_RO(temp1_input);
 
